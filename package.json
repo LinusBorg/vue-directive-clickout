@@ -1,0 +1,64 @@
+{
+  "name": "vue-directive-clickout",
+  "version": "0.1.0",
+  "author": "github.com/linusborg",
+  "private": true,
+  "description": "A directive to catch clicks outside of an element, compatible with Vue 2.0 only",
+  "keywords": [
+    "directive",
+    "Vue.js"
+  ],
+  "license": "MIT",
+  "main": "dist/vue-directive-clickout.cjs.js",
+  "files": [
+    "dist"
+  ],
+  "homepage": "https://github.com/linusborg/vue-directive-clickout",
+  "bugs": "https://github.com/linusborg/vue-directive-clickout",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/linusborg/vue-directive-clickout.git"
+  },
+  "scripts": {
+    "clean": "rm -rf dist .tmp",
+    "start": "webpack-dev-server --config scripts/webpack.config.example.js",
+    "dev": "webpack-dashboard -- webpack-dev-server --inline --hot --no-info --config scripts/webpack.config.example.js",
+    "build": "run-p build:cjs build:dev build:prod",
+    "build:cjs": "rollup -c scripts/rollup.config.js --environment BUILD:cjs",
+    "build:dev": "rollup -c scripts/rollup.config.js --environment BUILD:dev",
+    "build:prod": "rollup -c scripts/rollup.config.js --environment BUILD:prod | uglifyjs -mc warnings=false --comments -o dist/vue-directive-clickout.min.js",
+    "build:example": "webpack --config scripts/webpack.config.example.js",
+    "flow": "flow check",
+    "lint": "eslint --fix \"@(src|scripts)/**/*.js\"",
+    "release": "run-s lint flow test clean build"
+  },
+  "peerDependencies": {
+    "vue": ">= 2.0.0 || >= 2.0.0-rc.1 < 2.0.0"
+  },
+  "devDependencies": {
+    "babel-core": "^6.13.2",
+    "babel-eslint": "^6.1.0",
+    "babel-loader": "^6.2.4",
+    "babel-plugin-external-helpers": "^6.8.0",
+    "babel-plugin-transform-class-properties": "^6.10.2",
+    "babel-preset-es2015": "^6.14.0",
+    "babel-register": "^6.14.0",
+    "cross-env": "^3.0.0",
+    "css-loader": "^0.25.0",
+    "eslint": "^3.0.0",
+    "eslint-plugin-html": "^1.5.3",
+    "glob": "^7.0.3",
+    "json-loader": "^0.5.4",
+    "npm-run-all": "^3.0.0",
+    "rollup": "^0.36.0",
+    "rollup-plugin-babel": "^2.6.1",
+    "rollup-plugin-replace": "^1.1.1",
+    "rollup-plugin-vue": "^2.2.3",
+    "uglifyjs": "^2.4.10",
+    "vue": "^2.0.0-rc.8",
+    "vue-loader": "^9.5.0",
+    "webpack": "^2.1.0-beta.25",
+    "webpack-dashboard": "^0.1.8",
+    "webpack-dev-server": "^2.1.0-beta.5"
+  }
+}
