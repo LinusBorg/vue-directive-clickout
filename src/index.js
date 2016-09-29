@@ -1,6 +1,11 @@
 // @flow
 
-export default {
+function isVisible(el) {
+  const { display, visibility } = window.getComputedStyle(el)
+  return (display !== 'none' && visibility !== 'hidden')
+}
+
+const directive = {
   bind: function (el, binding, vNode) {
     // Provided expression must evaluate to a function.
 
@@ -11,14 +16,19 @@ export default {
 
       console.warn(warn)
     }
+
     // Define Handler and cache it on the element
-    const bubble = binding.modifiers.bubble
+    const bubbleMod = binding.modifiers.bubble
+    const visibleMod = binding.modifiers.visible
     const handler = (e) => {
-      if (bubble || (!el.contains(e.target) && el !== e.target)) {
+      const targetOk = (bubbleMod || (!el.contains(e.target) && el !== e.target))
+      const visibilityOk = !visibleMod || isVisible(el)
+      if (targetOk && visibilityOk) {
         binding.value(e)
       }
     }
-    el.__vueClickOutside__ = handler
+    el.__vueClickout__ = handler
+
 
     // add Event Listeners
     document.addEventListener('click', handler)
@@ -32,7 +42,11 @@ export default {
   }
 }
 
+if (window && window.Vue) {
+  window.Vue.directive('clickout', directive)
+}
 
+export { directive as default }
 if (process.env.NODE_ENV !== 'production') {
   console.log('Only print on development mode')
 }
