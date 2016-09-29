@@ -1,6 +1,6 @@
 {
   "name": "vue-directive-clickout",
-  "version": "0.1.0",
+  "version": "0.0.1-alpha",
   "author": "github.com/linusborg",
   "private": true,
   "description": "A directive to catch clicks outside of an element, compatible with Vue 2.0 only",
