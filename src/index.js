@@ -27,7 +27,7 @@ const directive = {
         binding.value(e)
       }
     }
-    el.__vueClickout__ = handler
+    el.__vueClickoutside__ = handler
 
 
     // add Event Listeners
